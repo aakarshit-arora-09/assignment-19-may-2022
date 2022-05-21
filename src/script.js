@@ -39,7 +39,10 @@ const populateList = (data)=>{
             active=div;
         }
         thumbnail.src=item.previewImage;
-        p.innerHTML=item.title;
+        if(item.title.length>35)
+            p.innerHTML= item.title.substr(0,15) + "..." + item.title.substr(item.title.length-12,item.title.length);
+        else
+            p.innerHTML=item.title;
         div.append(thumbnail);
         div.append(p);
         list.append(div);
