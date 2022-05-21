@@ -1,0 +1,31 @@
+.main{
+    display: flex;
+    justify-content: center;
+}
+.list-item{
+    width: 50vw;
+    display: flex;
+    align-items: center;
+}
+
+.list-item img{
+    height:50px;
+    width: 50px;
+}
+.cur-image{
+    height: 75%;
+    width: 50%;
+}
+.frame{
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+}
+input{
+    width: 200px;
+    /* border: none; */
+}
+.active{
+    background-color: blue;
+    color: white;
+}
