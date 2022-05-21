@@ -5,6 +5,7 @@ const activeImage=document.querySelector(".cur-image");
 const activeImageName = document.querySelector(".cur-img-name");
 
 document.addEventListener("keydown",(e)=>{handleUpDown(e)});
+activeImageName.addEventListener("input",(e)=>{handleNameChange(e)});
 
 //fetch data from json
 const fetchData = async()=>{
@@ -25,7 +26,7 @@ const handleClick = (target)=>{
 const populateList = (data)=>{
     //make first image in list as active image
     activeImage.src=data[0].previewImage;
-    activeImageName.value=data[0].title;
+    activeImageName.defaultValue=data[0].title;
 
     //populate list with images and names
     data.forEach((item,index)=>{
@@ -46,7 +47,7 @@ const populateList = (data)=>{
         div.append(thumbnail);
         div.append(p);
         list.append(div);
-    })
+    });
 
     //adding event listeners for clicks on all list items;
     document.querySelectorAll(".list-item").forEach((item)=>{
@@ -75,6 +76,18 @@ const handleUpDown = (e)=>{
 const changeActiveimage = ()=>{
     activeImage.src=data[active.id].previewImage;
     activeImageName.value=data[active.id].title;
+}
+
+//change name of active image 
+const handleNameChange = (e)=>{
+    console.log(e.target.value);
+    const newTitle=e.target.value;
+    const p=active.querySelector("p");
+    data[active.id].title=e.target.value;
+    if(newTitle.length>35)
+            p.innerHTML= newTitle.substr(0,15) + "..." + newTitle.substr(newTitle.length-10,newTitle.length);
+    else
+            p.innerHTML=newTitle;
 }
 //get data in global variable
 const getData = async()=>{

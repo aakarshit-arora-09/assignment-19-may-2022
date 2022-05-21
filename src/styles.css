@@ -25,7 +25,7 @@
 .cur-image{
     width: 400px;
     height:550px;
-    border-radius: 2%;
+    border-radius: 1%;
 }
 .frame{
     width: 400px;
@@ -40,6 +40,6 @@ input{
     text-align: center;
 }
 .active{
-    background-color: blue;
+    background-color: #2E86C1;
     color: white;
 }
