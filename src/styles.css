@@ -1,27 +1,35 @@
 .main{
     display: flex;
     justify-content: center;
+    padding: 0.5rem;
 }
 .list{
-    width: 300px;
-    margin: 1rem;
+    width: 250px;
 }
 .list-item{
     display: flex;
     align-items: center;
+    padding: 0 0.25rem;
+    margin: 0 0.5rem;
+    border-radius: 3%;
+    font-weight:600;
+    font-size: 0.75rem;
 }
 
 .list-item img{
-    height:50px;
-    width: 50px;
+    height:30px;
+    width: 30px;
+    border-radius: 10%;
+    margin: 0.5rem;
 }
 .cur-image{
-    width: 300px;
-    height:500px;
+    width: 400px;
+    height:550px;
+    border-radius: 2%;
 }
 .frame{
-    width: 300px;
-    height: 500px;
+    width: 400px;
+    height: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
