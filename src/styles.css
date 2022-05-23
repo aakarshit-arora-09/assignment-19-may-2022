@@ -46,7 +46,7 @@
     color: white;
 }
 
-@media(max-width:425px){
+@media(max-width:670px){
     .main{
         flex-direction: column-reverse;
         align-items: center;
