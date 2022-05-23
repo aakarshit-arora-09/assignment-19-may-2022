@@ -28,6 +28,7 @@
     width: 500px;
     height:87vh;
     border-radius: 1%;
+    object-fit: cover;
 }
 .frame{
     width: 500px;
@@ -58,6 +59,7 @@
     .cur-image{
         width: 80vw;
         height: 67vh;
+        object-fit: cover;
     }
     .cur-img-name{
         width: 80vw;

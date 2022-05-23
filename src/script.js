@@ -64,6 +64,8 @@ const setListeners = (target)=>{
 
 //up and down functionality
 const handleUpDown = (e)=>{
+    if(e.srcElement.className==='cur-img-name')
+        return;
     let id = active.id;
 
     if(e.code==="ArrowUp" && id>0)
