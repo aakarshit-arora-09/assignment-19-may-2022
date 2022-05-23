@@ -53,8 +53,8 @@ const populateList = (data)=>{
     document.querySelectorAll(".list-item").forEach((item)=>{
     item.addEventListener("click",(e)=>{
         handleClick(item);
-    })
-})}
+    });
+})};
 
 //up and down functionality
 const handleUpDown = (e)=>{
