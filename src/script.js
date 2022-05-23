@@ -41,7 +41,7 @@ const populateList = (data)=>{
         }
         thumbnail.src=item.previewImage;
         if(item.title.length>35)
-            p.innerHTML= item.title.substr(0,15) + "..." + item.title.substr(item.title.length-12,item.title.length);
+            p.innerHTML= item.title.substr(0,15) + "..." + item.title.substr(item.title.length-15,item.title.length);
         else
             p.innerHTML=item.title;
         div.append(thumbnail);
@@ -80,15 +80,15 @@ const changeActiveimage = ()=>{
 
 //change name of active image 
 const handleNameChange = (e)=>{
-    console.log(e.target.value);
     const newTitle=e.target.value;
     const p=active.querySelector("p");
     data[active.id].title=e.target.value;
     if(newTitle.length>35)
-            p.innerHTML= newTitle.substr(0,15) + "..." + newTitle.substr(newTitle.length-10,newTitle.length);
+            p.innerHTML= newTitle.substr(0,15) + "..." + newTitle.substr(newTitle.length-15,newTitle.length);
     else
             p.innerHTML=newTitle;
 }
+
 //get data in global variable
 const getData = async()=>{
     data = await fetchData();

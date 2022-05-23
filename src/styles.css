@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 .main{
     display: flex;
     justify-content: center;
-    padding: 0.5rem;
+    padding: 1rem;
+    font-family: 'Roboto', sans-serif;
 }
 .list{
-    width: 250px;
+    width: 300px;
 }
 .list-item{
     display: flex;
@@ -13,7 +15,7 @@
     margin: 0 0.5rem;
     border-radius: 3%;
     font-weight:600;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
 }
 
 .list-item img{
@@ -23,19 +25,19 @@
     margin: 0.5rem;
 }
 .cur-image{
-    width: 400px;
-    height:550px;
+    width: 500px;
+    height:87vh;
     border-radius: 1%;
 }
 .frame{
-    width: 400px;
-    height: 600px;
+    width: 500px;
+    height: 90vh;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-input{
-    width: 300px;
+.cur-img-name{
+    width: 500px;
     border: none;
     text-align: center;
 }
