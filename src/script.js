@@ -4,6 +4,7 @@ const list = document.querySelector(".list");
 const activeImage=document.querySelector(".cur-image");
 const activeImageName = document.querySelector(".cur-img-name");
 
+//event listeners for key and handling name change of image
 document.addEventListener("keydown",(e)=>{handleUpDown(e)});
 activeImageName.addEventListener("input",(e)=>{handleNameChange(e)});
 
@@ -35,26 +36,31 @@ const populateList = (data)=>{
         const div = document.createElement("div");
         div.classList.add("list-item");
         div.id=index;
+
+        //1st image in list by default active
         if(index===0){
             div.classList.add("active");
             active=div;
         }
+
         thumbnail.src=item.previewImage;
-        if(item.title.length>35)
-            p.innerHTML= item.title.substr(0,15) + "..." + item.title.substr(item.title.length-15,item.title.length);
-        else
-            p.innerHTML=item.title;
+        p.innerHTML=clipTitle(item.title);
         div.append(thumbnail);
         div.append(p);
         list.append(div);
     });
 
-    //adding event listeners for clicks on all list items;
-    document.querySelectorAll(".list-item").forEach((item)=>{
-    item.addEventListener("click",(e)=>{
-        handleClick(item);
-    });
-})};
+    //call function to add event listeners
+    setListeners(".list-item");
+}
+
+//add click listeners for all items in list
+const setListeners = (target)=>{
+    document.querySelectorAll(target).forEach((item)=>{
+        item.addEventListener("click",(e)=>{
+            handleClick(item);
+        });
+})}
 
 //up and down functionality
 const handleUpDown = (e)=>{
@@ -83,10 +89,15 @@ const handleNameChange = (e)=>{
     const newTitle=e.target.value;
     const p=active.querySelector("p");
     data[active.id].title=e.target.value;
-    if(newTitle.length>35)
-            p.innerHTML= newTitle.substr(0,15) + "..." + newTitle.substr(newTitle.length-15,newTitle.length);
+    p.innerHTML=clipTitle(newTitle);
+}
+
+//shorten title name in list 
+const clipTitle = (title) => {
+    if(title.length>35)
+        return title.substr(0,15) + "..." + title.substr(title.length-15,title.length);
     else
-            p.innerHTML=newTitle;
+        return title;
 }
 
 //get data in global variable
@@ -94,4 +105,6 @@ const getData = async()=>{
     data = await fetchData();
     populateList(data);
 }
+
+//function call to fetch data
 getData();
