@@ -1,4 +1,4 @@
-let data,active;
+let data,active,maxChars=0;
 
 const list = document.querySelector(".list");
 const activeImage=document.querySelector(".cur-image");
@@ -48,22 +48,38 @@ const populateList = (data)=>{
         div.append(thumbnail);
         div.append(p);
         list.append(div);
+        //finding maximum allowed characters
+        if(index===0)
+            checkMaxChars(div,p);
+        //if text exceeds maximum allowed characters, clip string
+        if(p.innerHTML.length>maxChars){
+            const halfLength = (maxChars-3)/2;
+            p.innerHTML = p.innerHTML.substring(0,halfLength) + "..." + p.innerHTML.substring(p.innerHTML.length-halfLength,p.innerHTML.length); 
+        }
     });
-
     //call function to add event listeners
     setListeners(".list-item");
-    checkoverflow();
 }
 
-//check for overflow in any list item
-const checkoverflow = ()=>{
-    document.querySelectorAll('.list-item').forEach(item=>{
-        if(item.scrollWidth  > item.clientWidth){
-            const p = item.querySelector("p");
-            p.innerHTML=p.innerHTML.substring(0,15) + "..." + p.innerHTML.substring(p.innerHTML.length-15,p.innerHTML.length);
-        }
-    })
+//check maximum number of characters that can be stuffed in a div
+const checkMaxChars = (element,child)=>{
+    //taking average of widest and thinnest letters
+    const content=child.innerHTML;
+    child.innerHTML="";
+    while(element.scrollWidth<=element.clientWidth){
+        child.innerHTML+="M";
+        maxChars++;
+    }
+    
+    child.innerHTML="";
+    while(element.scrollWidth<=element.clientWidth){
+        child.innerHTML+="I";
+        maxChars++;
+    }
+    maxChars=maxChars/2-10;   //subtracting some characters for good buffer
+    child.innerHTML = content;
 }
+
 
 //add click listeners for all items in list
 const setListeners = (target)=>{
@@ -103,7 +119,10 @@ const handleNameChange = (e)=>{
     const p=active.querySelector("p");
     data[active.id].title=e.target.value;
     p.innerHTML=newTitle;
-    checkoverflow();
+    if(p.innerHTML.length>maxChars){
+        const halfLength = (maxChars-3)/2;
+        p.innerHTML = p.innerHTML.substring(0,halfLength) + "..." + p.innerHTML.substring(p.innerHTML.length-halfLength,p.innerHTML.length); 
+    }
 }
 
 //get data in global variable
