@@ -44,7 +44,7 @@ const populateList = (data)=>{
         }
 
         thumbnail.src=item.previewImage;
-        p.innerHTML=clipTitle(item.title);
+        p.innerHTML=item.title;
         div.append(thumbnail);
         div.append(p);
         list.append(div);
@@ -52,6 +52,17 @@ const populateList = (data)=>{
 
     //call function to add event listeners
     setListeners(".list-item");
+    checkoverflow();
+}
+
+//check for overflow in any list item
+const checkoverflow = ()=>{
+    document.querySelectorAll('.list-item').forEach(item=>{
+        if(item.scrollWidth  > item.clientWidth){
+            const p = item.querySelector("p");
+            p.innerHTML=p.innerHTML.substring(0,15) + "..." + p.innerHTML.substring(p.innerHTML.length-15,p.innerHTML.length);
+        }
+    })
 }
 
 //add click listeners for all items in list
@@ -91,15 +102,8 @@ const handleNameChange = (e)=>{
     const newTitle=e.target.value;
     const p=active.querySelector("p");
     data[active.id].title=e.target.value;
-    p.innerHTML=clipTitle(newTitle);
-}
-
-//shorten title name in list 
-const clipTitle = (title) => {
-    if(title.length>35)
-        return title.substr(0,15) + "..." + title.substr(title.length-15,title.length);
-    else
-        return title;
+    p.innerHTML=newTitle;
+    checkoverflow();
 }
 
 //get data in global variable
