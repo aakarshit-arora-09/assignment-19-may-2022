@@ -52,10 +52,7 @@ const populateList = (data)=>{
         if(index===0)
             checkMaxChars(div,p);
         //if text exceeds maximum allowed characters, clip string
-        if(p.innerHTML.length>maxChars){
-            const halfLength = (maxChars-3)/2;
-            p.innerHTML = p.innerHTML.substring(0,halfLength) + "..." + p.innerHTML.substring(p.innerHTML.length-halfLength,p.innerHTML.length); 
-        }
+        p.innerHTML=clipTitle(p.innerHTML);
     });
     //call function to add event listeners
     setListeners(".list-item");
@@ -119,10 +116,17 @@ const handleNameChange = (e)=>{
     const p=active.querySelector("p");
     data[active.id].title=e.target.value;
     p.innerHTML=newTitle;
-    if(p.innerHTML.length>maxChars){
+    p.innerHTML=clipTitle(p.innerHTML);
+}
+
+//shorten the title if too long
+const clipTitle = (str)=>{
+    if(str.length>maxChars){
         const halfLength = (maxChars-3)/2;
-        p.innerHTML = p.innerHTML.substring(0,halfLength) + "..." + p.innerHTML.substring(p.innerHTML.length-halfLength,p.innerHTML.length); 
+        return str.substring(0,halfLength) + "..." + str.substring(str.length-halfLength,str.length);
     }
+    else 
+        return str;
 }
 
 //get data in global variable
@@ -131,5 +135,7 @@ const getData = async()=>{
     populateList(data);
 }
 
+//refresh page when resized
+window.onresize = ()=> location.reload();
 //function call to fetch data
 getData();
